@@ -1,0 +1,45 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "build and test main.app",
+        "type": "shell",
+        "dependsOrder": "sequence",
+        "dependsOn": [
+          "build",
+          "test"
+        ],
+        "group": {
+          "kind": "test",
+          "isDefault": true
+        },
+      },
+      {
+        "label": "build",
+        "type": "shell",
+        "command": "g++",
+        "args": [
+          "-O2",
+          "-std=c++14",
+          "-o",
+          "${fileDirname}/a.out",
+          "${file}",
+          "-I",
+          "${workspaceFolder}/ac-library"
+        ]
+      },
+      {
+        "label": "test",
+        "type": "shell",
+        "options": {
+          "cwd": "${fileDirname}"
+        },
+        "command": "oj",
+        "args": [
+          "t"
+        ]
+      }
+    ]
+}
